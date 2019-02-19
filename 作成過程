@@ -1,0 +1,83 @@
+仮想環境
+    python3 -m venv myvenv
+    source myvenv/bin/activate
+    pip install --upgrade pip
+    pip install django
+プロジェクトを作成
+    django-admin startproject mysite .
+----------------------
+djangogirls
+├── manage.py
+└── mysite
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+----------------------
+Setup a database
+    python manage.py migrate
+Creating an application
+    python manage.py startapp blog
+---------------------
+djangogirls
+├── blog
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── db.sqlite3
+├── manage.py
+└── mysite
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+------------------------
+アプリケーションを作ったら、Djangoにそれを使うように伝えないといけません。それはmysite/settings.pyファイルの中でやります。まずINSTALLED_APPSをみつけて)の上に'blog'という一行を追加します。
+
+Creating a blog post model
+    blog/models.pyを開いて全部削除し、下のコードを書きます：   ### ここから wings を始めよう　###
+------------------------------------------------
+from django.db import models
+from django.utils import timezone
+​
+class Post(models.Model):
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+​
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+​
+    def __str__(self):
+        return self.title
+-----------------------------------------------
+データベースにモデル用のテーブルを作る
+
+最後のステップは新しいモデルをデータベースに追加することです。まず、（今作った）モデルの中で少し変更があったことをDjangoに知らせなければなりませんから、python manage.py makemigrations blogとタイプします。こんな感じです。
+
+
+from django.db import models
+
+​class Schedule(models.Model):
+    # id = AutoField(primary_key=True)  # 自動的に追加されるので定義不要
+    title = models.CharField(max_length=20)
+    date = models.DateTimeField(blank=False, null=False)
+    start = models.IntegerField()
+    end = models.IntegerField()     
+    place = models.TextField()
+
+    def publish(self):
+        self.save()
+​
+    def __str__(self):
+        return self.title
