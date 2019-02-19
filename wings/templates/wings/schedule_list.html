@@ -4,8 +4,35 @@
         <title>Wings TC</title>
     </head>
     <body>
-        <p>Hi there!</p>
-        <p>It works!</p>
+        <center>
+        <FONT SIZE=6 COLOR=green>WINGS テニスクラブ</FONT>
+        <br><br>
+
+        <table border=1>
+        <tr BGCOLOR=yellow >
+        <th >　</th>
+        <th >名前</th>
+        <th >実施日</th>
+        <th >開始</th>
+        <th >終了</th>
+        <th >コート名</th>
+        <th>　</th>
+        </tr>
+        {% for s in schedules %}
+        <tr>
+        <td BGCOLOR=green> 出欠表示 </td>
+        <td> {{ s.title }} </td>
+        <td> {{ s.date }} </td>
+        <td> {{ s.start }} </td>
+        <td> {{ s.end }} </td>
+        <td> {{ s.place }}</td>
+        <td BGCOLOR=gray> 変更　</td>
+        </tr>        
+        {% endfor %}
+
+        </table>
+        </center>
+
     </body>
 </html>
 
