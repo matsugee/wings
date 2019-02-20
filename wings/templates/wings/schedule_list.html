@@ -1,14 +1,8 @@
+{% extends 'wings/base.html' %}
 
-<html>
-    <head>
-        <title>Wings TC</title>
-    </head>
-    <body>
-        <center>
-        <FONT SIZE=6 COLOR=green>WINGS テニスクラブ</FONT>
-        <br><br>
+{% block content %}
 
-        <table border=1>
+        <table border=2>
         <tr BGCOLOR=yellow >
         <th >　</th>
         <th >名前</th>
@@ -21,7 +15,7 @@
         {% for s in schedules %}
         <tr>
         <td BGCOLOR=green> 出欠表示 </td>
-        <td> {{ s.title }} </td>
+        <td> <a href="{% url 'schedule_detail' pk=s.pk %}">{{ s.title }}</a> </td>
         <td> {{ s.date }} </td>
         <td> {{ s.start }} </td>
         <td> {{ s.end }} </td>
@@ -29,10 +23,7 @@
         <td BGCOLOR=gray> 変更　</td>
         </tr>        
         {% endfor %}
-
         </table>
-        </center>
 
-    </body>
-</html>
+{% endblock %}
 

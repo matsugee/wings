@@ -1,0 +1,15 @@
+{% extends 'wings/base.html' %}
+
+{% block content %}
+
+<a class="btn btn-default" href="{% url 'schedule_edit' pk=sc.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+    <div class="sc">
+        <h3>タイトル：{{ sc.title }}
+        <p>年月日：{{ sc.date }} </p>
+        <p>開始：{{ sc.start }} 時</p>
+        <p>終了：{{ sc.end  }} 時</p>                
+        <p>コート名：{{ sc.place }} </p></h3>
+    </div>
+{% endblock %}
+
